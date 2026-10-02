@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción al Evento</title>
+    <!-- Aquí conectamos el archivo CSS que le dará color y forma -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <main class="contenedor-formulario">
+        <h2>Formulario de Inscripción</h2>
+        <p class="instrucciones">Por favor, complete todos los campos obligatorios para registrarse en el evento.</p>
+
+        <!-- El id="form-inscripcion" es crucial para que tu compañero de JavaScript capture los datos -->
+        <form id="form-inscripcion" novalidate>
+
+            <div class="grupo-input">
+                <label for="apellido">Apellido *</label>
+                <input type="text" id="input-apellido" name="apellido">
+                <span id="error-apellido" class="error-texto"></span>
+            </div>
+
+            <div class="grupo-input">
+                <label for="nombre">Nombre *</label>
+                <input type="text" id="input-nombre" name="nombre">
+                <span id="error-nombre" class="error-texto"></span>
+            </div>
+
+            <div class="grupo-input">
+                <label for="documento">Documento (8 dígitos) *</label>
+                <input type="number" id="input-documento" name="documento">
+                <span id="error-documento" class="error-texto"></span>
+            </div>
+
+            <div class="grupo-input">
+                <label for="email">Email *</label>
+                <input type="email" id="input-email" name="email">
+                <span id="error-email" class="error-texto"></span>
+            </div>
+
+            <div class="grupo-input">
+                <label for="celular">Celular *</label>
+                <input type="number" id="input-celular" name="celular">
+                <span id="error-celular" class="error-texto"></span>
+            </div>
+
+            <div class="grupo-input">
+                <label for="empresa">Empresa a la que representa *</label>
+                <input type="text" id="input-empresa" name="empresa">
+                <span id="error-empresa" class="error-texto"></span>
+            </div>
+
+            <div class="grupo-input">
+                <label for="cargo">Cargo que desempeña *</label>
+                <input type="text" id="input-cargo" name="cargo">
+                <span id="error-cargo" class="error-texto"></span>
+            </div>
+
+            <div class="grupo-input">
+                <label for="comprobante">Comprobante de pago *</label>
+                <input type="file" id="input-comprobante" name="comprobante" accept=".pdf, .jpg, .jpeg">
+                <small>Solo se admiten archivos en formato PDF o JPG.</small>
+                <span id="error-comprobante" class="error-texto"></span>
+            </div>
+
+            <!-- Este es el ÚNICO botón de inscripción que debe existir -->
+            <button type="submit" id="btnInscribir">Inscribirme</button>
+        </form>
+
+        <!-- Botón para ir al panel de administrador -->
+        <div class="acceso-admin">
+            <a href="admin.html" class="btn-secundario">Acceso Administrador ⚙</a>
+        </div>
+    </main>
+
+    <script src="js/formulario.js"></script>
+</body>
+</html>

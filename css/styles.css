@@ -1,0 +1,158 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Fondo con un degradado moderno y elegante */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.contenedor-formulario {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    /* Sombra más profunda y difuminada para efecto "tarjeta flotante" */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 550px;
+}
+
+h2 {
+    text-align: center;
+    color: #2d3748;
+    margin-bottom: 8px;
+    font-size: 26px;
+}
+
+.instrucciones {
+    text-align: center;
+    color: #718096;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.grupo-input {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="file"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #2d3748;
+    background-color: #f8fafc;
+    /* Transición suave para cuando cambie de color */
+    transition: all 0.3s ease;
+}
+
+/* Efecto moderno cuando el usuario hace clic en el input */
+input:focus {
+    border-color: #667eea;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+    outline: none;
+}
+
+input[type="file"] {
+    padding: 9px;
+    background-color: #f8fafc;
+}
+
+small {
+    display: block;
+    margin-top: 5px;
+    color: #a0aec0;
+    font-size: 12px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #667eea 0%, #5a67d8 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(90, 103, 216, 0.3);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #4c51bf 100%);
+    transform: translateY(-2px); /* Pequeño efecto de elevación */
+    box-shadow: 0 6px 15px rgba(90, 103, 216, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Estilos para el botón de acceso al administrador */
+.acceso-admin {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.btn-secundario {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: #edf2f7;
+    color: #4a5568;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-secundario:hover {
+    background-color: #e2e8f0;
+    color: #2d3748;
+}
+
+/* --- CLASES PARA MANEJO DE ERRORES (Requeridas para la lógica) --- */
+
+input.campo-invalido,
+input[type="text"].campo-invalido,
+input[type="number"].campo-invalido,
+input[type="email"].campo-invalido,
+input[type="file"].campo-invalido {
+    border: 2px solid #e53e3e !important;
+    background-color: #fff5f5 !important;
+    box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.15) !important;
+}
+
+.error-texto {
+    color: #e53e3e;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+    font-weight: 600;
+    min-height: 16px;
+}
