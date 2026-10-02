@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+
+  // Formulario de Login
+  <div id="contenedor-login" class="login-card">
+    <h2>Acceso Administrador</h2>
+    <form id="form-login">
+      
+      <div class="form-group">
+        <label for="input-usuario">Usuario (Nombre del grupo):</label>
+        <input type="text" id="input-usuario" placeholder="Ej: veinticinco" required>
+      </div>
+
+      <div class="form-group">
+        <label for="input-password">Contraseña:</label>
+        <div class="wrapper-input">
+          <input type="password" id="input-password" placeholder="••••••••" required>
+          <button type="button" id="btn-ojito" title="Mostrar/Ocultar contraseña">👁️️</button>
+        </div>
+      </div>
+
+      <button type="submit" id="btn-ingresar">Ingresar</button>
+    </form>
+  </div>
+
+  // Panel General (Oculto por defecto)
+  <div id="panel-admin" class="oculto">
+    
+    <header class="admin-header">
+      <h1>Panel de Gestión de Inscriptos</h1>
+      <div class="acciones-header">
+        <button id="btn-tema">🌙 Modo Oscuro</button>
+        <a href="index.html" class="btn-regreso">Volver al Formulario</a>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <div class="bar-herramientas">
+        <input type="text" id="input-busqueda" placeholder="Buscar por Apellido, Nombre, Documento o Email...">
+        
+        <div class="contador-container">
+          Total de inscriptos: <span id="contador-inscriptos">0</span>
+        </div>
+      </div>
+
+      <table id="tabla-inscriptos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Apellido</th>
+            <th>Nombre</th>
+            <th>Documento</th>
+            <th>Email</th>
+            <th>Celular</th>
+            <th>Empresa</th>
+            <th>Cargo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-body">
+          <!-- El Compañero 4 inyectará las filas dinámicamente -->
+        </tbody>
+      </table>
+    </main>
+
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
