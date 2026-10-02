@@ -1,76 +1,89 @@
-document.getElementById('form-inscripcion').addEventListener('submit', async function(evento) {
-    evento.preventDefault(); // Detiene el envío automático para validar primero
+document.addEventListener('DOMContentLoaded', () => {
+    const formulario = document.getElementById('form-inscripcion');
 
-    let formularioValido = true;
-    const campos = ['apellido', 'nombre', 'documento', 'email', 'celular', 'empresa', 'cargo', 'comprobante'];
-    const datosEnvio = new FormData(); // Necesario para enviar archivos adjuntos y texto
+    formulario.addEventListener('submit', async (evento) => {
+        // Evita que el formulario se envíe automáticamente y recargue la página
+        evento.preventDefault();
 
-    // 1. Limpiar los errores de la validación anterior
-    document.querySelectorAll('.campo-invalido').forEach(input => input.classList.remove('campo-invalido'));
-    document.querySelectorAll('[id^="error-"]').forEach(span => span.textContent = '');
+        let esValido = true;
 
-    // 2. Iterar sobre cada campo acordado
-    campos.forEach(campo => {
-        const inputElemento = document.getElementById(`input-${campo}`);
-        const errorElemento = document.getElementById(`error-${campo}`);
-        let valor = inputElemento.value.trim();
+        // Lista de todos los campos (coinciden con la parte final de los IDs del HTML)
+        const campos = ['apellido', 'nombre', 'documento', 'email', 'celular', 'empresa', 'cargo', 'comprobante'];
 
-        // Validación: Ningún campo puede estar vacío
-        if (!valor && campo !== 'comprobante') {
-            mostrarError(inputElemento, errorElemento, 'Este campo es obligatorio.');
-            formularioValido = false;
-        } else if (campo === 'comprobante' && inputElemento.files.length === 0) {
-            mostrarError(inputElemento, errorElemento, 'Debe adjuntar su comprobante de pago.');
-            formularioValido = false;
-        } else {
-            // Validaciones específicas de formato
-            if (campo === 'documento' && !/^\d{8}$/.test(valor)) {
-                mostrarError(inputElemento, errorElemento, 'El documento debe tener exactamente 8 dígitos.');
-                formularioValido = false;
+        // 1. Limpiar los mensajes y estilos de error previos
+        campos.forEach(campo => {
+            const inputElemento = document.getElementById(`input-${campo}`);
+            const errorElemento = document.getElementById(`error-${campo}`);
+            
+            inputElemento.classList.remove('campo-invalido');
+            errorElemento.textContent = '';
+        });
+
+        // 2. Validar cada campo
+        campos.forEach(campo => {
+            const inputElemento = document.getElementById(`input-${campo}`);
+            const errorElemento = document.getElementById(`error-${campo}`);
+            
+            // Validación específica para el archivo (comprobante)
+            if (campo === 'comprobante') {
+                if (inputElemento.files.length === 0) {
+                    mostrarError(inputElemento, errorElemento, 'Debe adjuntar un comprobante de pago.');
+                    esValido = false;
+                }
+            } else {
+                // Validación para campos de texto/números
+                const valor = inputElemento.value.trim();
+
+                if (valor === '') {
+                    mostrarError(inputElemento, errorElemento, 'Este campo es obligatorio.');
+                    esValido = false;
+                } else {
+                    // Validaciones específicas de formato
+                    if (campo === 'documento' && !/^\d{8}$/.test(valor)) {
+                        mostrarError(inputElemento, errorElemento, 'El documento debe tener exactamente 8 dígitos.');
+                        esValido = false;
+                    }
+                    if (campo === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor)) {
+                        mostrarError(inputElemento, errorElemento, 'El formato del email no es válido.');
+                        esValido = false;
+                    }
+                    if (campo === 'celular' && !/^\d{9,10}$/.test(valor)) {
+                        mostrarError(inputElemento, errorElemento, 'El celular debe tener entre 9 y 10 dígitos.');
+                        esValido = false;
+                    }
+                }
             }
-            if (campo === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor)) {
-                mostrarError(inputElemento, errorElemento, 'Ingrese un formato de email válido.');
-                formularioValido = false;
-            }
-            if (campo === 'celular' && !/^\d{9,10}$/.test(valor)) {
-                mostrarError(inputElemento, errorElemento, 'El celular debe tener entre 9 y 10 dígitos.');
-                formularioValido = false;
-            }
-        }
+        });
 
-        // Agregar los datos capturados para enviarlos al backend
-        if (campo === 'comprobante' && inputElemento.files.length > 0) {
-            datosEnvio.append(campo, inputElemento.files[0]);
-        } else {
-            datosEnvio.append(campo, valor);
+        // 3. Enviar los datos si todo está correcto
+        if (esValido) {
+            // FormData captura automáticamente todos los inputs (incluyendo el archivo) que tengan el atributo "name"
+            const datosDelFormulario = new FormData(formulario);
+
+            try {
+                // Conexión al backend enviando los datos mediante POST a /inscribir
+                const respuesta = await fetch('/inscribir', {
+                    method: 'POST',
+                    body: datosDelFormulario
+                });
+
+                if (respuesta.ok) {
+                    // Limpia el formulario tras un envío exitoso
+                    formulario.reset();
+                    // Aquí podrías agregar un mensaje de éxito en el HTML si lo desean más adelante
+                    console.log('Inscripción completada con éxito');
+                } else {
+                    console.error('Ocurrió un problema en el servidor al intentar registrar la inscripción');
+                }
+            } catch (error) {
+                console.error('Error de conexión con el servidor:', error);
+            }
         }
     });
 
-    // 3. Envío al servidor si todo es válido
-    if (formularioValido) {
-        try {
-            const respuesta = await fetch('/inscribir', {
-                method: 'POST',
-                body: datosEnvio
-            });
-
-            if (respuesta.ok) {
-                document.getElementById('form-inscripcion').reset();
-                // Opcional: Podés inyectar un mensaje de éxito en el DOM aquí
-                console.log('Inscripción exitosa'); 
-            } else {
-                console.error('Error al registrar en el servidor');
-            }
-        } catch (error) {
-            console.error('Error de conexión:', error);
-        }
+    // Función auxiliar para inyectar la clase de error y el texto sin usar alert()
+    function mostrarError(input, span, mensaje) {
+        input.classList.add('campo-invalido');
+        span.textContent = mensaje;
     }
 });
-
-// Función auxiliar para inyectar errores sin usar alert()
-function mostrarError(input, spanElemento, mensaje) {
-    input.classList.add('campo-invalido');
-    if (spanElemento) {
-        spanElemento.textContent = mensaje;
-    }
-}
