@@ -87,3 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         span.textContent = mensaje;
     }
 });
+
+document.getElementById("btn-tema-form").addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+});

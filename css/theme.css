@@ -5,6 +5,7 @@ body.dark-mode {
 }
 
 body.dark-mode .login-card,
+body.dark-mode .contenedor-formulario,
 body.dark-mode table {
   background-color: #1e1e1e;
   color: #e0e0e0;

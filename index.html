@@ -6,6 +6,7 @@
     <title>Inscripción al Evento</title>
     <!-- Aquí conectamos el archivo CSS que le dará color y forma -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
 
@@ -70,9 +71,10 @@
         </form>
 
         <!-- Botón para ir al panel de administrador -->
-        <div class="acceso-admin">
-            <a href="admin.html" class="btn-secundario">Acceso Administrador ⚙</a>
-        </div>
+    <div class="acceso-admin" style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+        <a href="admin.html" class="btn-secundario" style="background-color: #4a5568; color: #edf2f7;">Acceso Administrador ⚙</a>
+        <button type="button" id="btn-tema-form" class="btn-secundario" onclick="document.body.classList.toggle('dark-mode')">🌙 Modo Oscuro/Claro</button>
+    </div>
     </main>
 
     <script src="js/formulario.js"></script>

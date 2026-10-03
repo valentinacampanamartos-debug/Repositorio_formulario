@@ -330,3 +330,8 @@ th {
   background-color: #007bff;
   color: white;
 }
+#btn-ojito {
+    width: 42px !important;
+    flex-shrink: 0;
+    outline: none;
+}

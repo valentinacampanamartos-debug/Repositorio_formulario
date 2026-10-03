@@ -6,9 +6,10 @@ const API_URL = "";       // dirección del servidor
 
 // "Servidor falso" para poder probar sin backend
 let datosPrueba = [
-  { id: 1, apellido: "Pérez", nombre: "Juan", documento: "12345678", email: "juan@mail.com", celular: "1234567890", empresa: "Tech", cargo: "Dev" },
-  { id: 2, apellido: "Gómez", nombre: "Lucía", documento: "23456789", email: "lucia@mail.com", celular: "1198765432", empresa: "Redes SA", cargo: "Analista" },
-  { id: 3, apellido: "Díaz", nombre: "Martín", documento: "34567890", email: "martin@mail.com", celular: "341555123", empresa: "Soft", cargo: "QA" }
+  { id: 1, apellido: "Gonzalez", nombre: "Matias", documento: "12345678", email: "matiasagonzalez08@gmail.com", celular: "1234567890", empresa: "Tech", cargo: "Dev" },
+  { id: 2, apellido: "Campana", nombre: "Valentina", documento: "23456789", email: "valentina.campana.martos@gmail.com", celular: "1198765432", empresa: "Redes SA", cargo: "Analista" },
+  { id: 3, apellido: "Lucchini", nombre: "Giuliana", documento: "34567890", email: "giulilucchini8@gmail.com", celular: "341555123", empresa: "Soft", cargo: "QA" },
+  { id: 3, apellido: "Morganti", nombre: "Lucia", documento: "34567890", email: "luciamorganti197@gmail.com", celular: "341555123", empresa: "Tech", cargo: "QA" }
 ];
 
 const CAMPOS = ["apellido", "nombre", "documento", "email", "celular", "empresa", "cargo"];
@@ -213,3 +214,30 @@ inputBusqueda.addEventListener("input", mostrar);
 if (btnRefrescar) btnRefrescar.addEventListener("click", cargarInscriptos);
 
 cargarInscriptos();
+
+// --- Agregado mínimo para Login y Tema ---
+document.getElementById("btn-ojito").addEventListener("click", () => {
+  const pass = document.getElementById("input-password");
+  pass.type = pass.type === "password" ? "text" : "password";
+});
+
+document.getElementById("form-login").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const user = document.getElementById("input-usuario").value;
+  const pass = document.getElementById("input-password").value;
+  
+  if (user === "veinticinco" && pass === "cinco_555") {
+    document.getElementById("contenedor-login").classList.add("oculto");
+    document.getElementById("panel-admin").classList.remove("oculto");
+  } else {
+    alert("Usuario o contraseña incorrectos");
+  }
+});
+
+document.getElementById("btn-tema").addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+});
+
+document.getElementById("btn-tema-login").addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+});
