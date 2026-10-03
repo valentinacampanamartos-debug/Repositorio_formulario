@@ -1,4 +1,5 @@
 * {
+<<<<<<< HEAD
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -155,6 +156,7 @@ input[type="file"].campo-invalido {
     display: block;
     font-weight: 600;
     min-height: 16px;
+=======
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -329,9 +331,5 @@ th, td {
 th {
   background-color: #007bff;
   color: white;
-}
-#btn-ojito {
-    width: 42px !important;
-    flex-shrink: 0;
-    outline: none;
+>>>>>>> origin/feature/admin-interfaz
 }
